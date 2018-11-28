@@ -95,6 +95,10 @@
         width: $cards__card--width;
       }
 
+      &--hide {
+        display: none;
+      }
+
       // element
       // `> .cards > .card > .card__photo`
 
@@ -368,6 +372,31 @@
             margin-left: .3rem;
             content: '>';
           }
+        }
+      }
+    }
+
+    // element
+    // `> .cards > .cards__no-result`
+    // block
+    // `> .cards > .no-result`
+    > .cards__no-result.no-result {
+      // [layout]
+      text-align: center;
+
+      // [skin]
+      margin: {
+        top: 1.72rem;
+        bottom: 1.44rem;
+      }
+
+      // element
+      // `> .cards > .no-result > .no-result__text`
+      > .no-result__text {
+        // modifier
+        // `> .cards > .no-result > .no-result__text--hide`
+        &--hide {
+          display: none;
         }
       }
     }
