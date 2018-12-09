@@ -29,7 +29,7 @@ router.get( /^\/$/, ( req, res ) => {
  */
 
 router.get( /^\/login$/, ( req, res ) => {
-    res.sendFile( path.join( projectRoot, `/static/dist/html/home/index.${ req.query.language }.html` ) );
+    res.sendFile( path.join( projectRoot, `/static/dist/html/home/login.${ req.query.language }.html` ) );
 } );
 
 /**

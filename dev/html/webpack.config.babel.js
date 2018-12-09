@@ -70,6 +70,7 @@ export default languageSettings.support.map( language => ( {
 
         // Route `home`
         'home/index': path.join( pugRoot, 'home/index.pug' ),
+        'home/login': path.join( pugRoot, 'home/login.pug' ),
 
         // Route `research`
         'research/groups':       path.join( pugRoot, 'research/groups.pug' ),

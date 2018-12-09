@@ -1,0 +1,36 @@
+extends /layouts/home.pug
+
+append data
+  -
+    const i18n = Object.freeze( {
+      'en-US': {
+        'title': 'Login',
+        'topic': 'Latest news',
+        'more':  'more',
+        'hot':   'Hot news',
+      },
+      'zh-TW': {
+        'title': '登入',
+        'topic': '最新消息',
+        'more':  '更多資訊',
+        'hot':   '最近熱門',
+      },
+    } );
+    const currentRoute = '';
+
+append title
+  +title( i18n[ language ].title )
+
+append stylesheets
+  +css( 'home/login' )
+
+append header
+  +banner( i18n[ language ].title )
+
+append content
+    h1.title__text TEST!!!LOGIN
+
+append footer
+
+append scripts
+  +js( 'home/index' )

@@ -64,6 +64,7 @@ export default {
 
         // Route `home`
         'home/index': path.join( sassRoot, 'home/index.scss' ),
+        'home/login': path.join( sassRoot, 'home/login.scss' ),
 
         // Route `research`
         'research/groups':       path.join( sassRoot, 'research/groups.scss' ),
