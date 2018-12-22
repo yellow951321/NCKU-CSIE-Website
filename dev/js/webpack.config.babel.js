@@ -61,7 +61,6 @@ export default {
         'login/verify':        path.join( jsSrcRoot, 'login/verify.js' ),
 
         // Route `research`
-        'research/groups':       path.join( jsSrcRoot, 'research/groups.js' ),
         'research/index':        path.join( jsSrcRoot, 'research/index.js' ),
         'research/labs':         path.join( jsSrcRoot, 'research/labs.js' ),
         'research/publications': path.join( jsSrcRoot, 'research/publications.js' ),

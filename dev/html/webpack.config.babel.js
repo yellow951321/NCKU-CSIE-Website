@@ -79,7 +79,6 @@ export default languageSettings.support.map( language => ( {
         'login/verify':        path.join( pugRoot, 'login/verify.pug' ),
 
         // Route `research`
-        'research/groups':       path.join( pugRoot, 'research/groups.pug' ),
         'research/index':        path.join( pugRoot, 'research/index.pug' ),
         'research/labs':         path.join( pugRoot, 'research/labs.pug' ),
         'research/publications': path.join( pugRoot, 'research/publications.pug' ),
