@@ -3,7 +3,6 @@
  *
  * Including following sub-routes:
  * - `/`
- * - `/login`
  * - `/search`
  * - `/calendar`
  */
@@ -24,13 +23,6 @@ router.get( /^\/$/, ( req, res ) => {
     res.sendFile( path.join( projectRoot, `/static/dist/html/home/index.${ req.query.language }.html` ) );
 } );
 
-/**
- * Resolve URL `/login`.
- */
-
-router.get( /^\/login$/, ( req, res ) => {
-    res.sendFile( path.join( projectRoot, `/static/dist/html/home/login.${ req.query.language }.html` ) );
-} );
 
 /**
  * Resolve URL `/search`.

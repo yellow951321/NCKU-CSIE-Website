@@ -1,0 +1,47 @@
+extends /layouts/home.pug
+
+append data
+  -
+    const i18n = Object.freeze( {
+      'en-US': {
+        'title': 'Sign in',
+        'account': 'Account',
+        'password': 'Password',
+        'forget_password': 'Forget your password?',
+        'button_word': 'Sign in',
+      },
+      'zh-TW': {
+        'title': '登入',
+        'account': '帳號',
+        'password': '密碼',
+        'forget_password': '忘記密碼？',
+        'button_word': '登入',
+      },
+    } );
+    const currentRoute = '';
+
+append title
+  +title( i18n[ language ].title )
+
+append stylesheets
+  +css( '/login/index' )
+
+append header
+
+append content
+  section.left_section
+
+  form.login( method = 'post', action = '/login' )
+    h1.login__title= i18n[ language ].title
+    input.login__input--account( type = 'text', name = 'account', placeholder = i18n[ language ].account )
+    input.login__input--password( type = 'password', name = 'password', placeholder = i18n[ language ].password )
+    a.login__forget_password( href =  url( { href : 'login/forget' } ) )= i18n[ language ].forget_password
+    section.login__verification
+    input.login__login_button( type = 'submit', value = i18n[ language ].button_word )
+
+  section.right_section
+
+append footer
+
+append scripts
+  +js( 'login/index' )

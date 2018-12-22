@@ -22,15 +22,22 @@ append title
   +title( i18n[ language ].title )
 
 append stylesheets
-  +css( 'home/login' )
+  +css( '/login/error' )
 
 append header
-  +banner( i18n[ language ].title )
 
 append content
-    h1.title__text TEST!!!LOGIN
+  form.login( method = 'post', action = '/login/error' )
+    h1.login__title error1111
+    input.login__input--account( type = 'text', name = 'account', placeholder = '帳號' )
+    br
+    input.login__input--password( type = 'passwd', name = 'password', placeholder = '密碼' )
+    br
+    a.login__forgetPassword( href = '' ) 忘記密碼？
+    section.login__verification
+    input.login__loginButton( type = 'submit', value = '登入' )
 
 append footer
 
 append scripts
-  +js( 'home/index' )
+  +js( '/login/error' )

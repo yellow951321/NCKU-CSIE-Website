@@ -1,0 +1,75 @@
+%section {
+  // [ position ]
+  width: 40%;
+  float: left;
+  border: 2px solid white;
+}
+
+%login_template {
+  // [ position ]
+  width: 20%;
+  float: left;
+
+  // [ layout ]
+  margin: 212.6px 0 300px;
+
+  // [ skin ]
+  background-color: rgba( 224, 224, 224, .1 );
+  border: {
+    width: 5.6px 0 0;
+    style: solid;
+    color: #999999;
+    radius: 3px;
+  }
+}
+
+%button {
+  // [ position ]
+
+  // [ skin ]
+  border: {
+    radius: 3px;
+    style: none;
+  }
+  box-shadow: 0 4px 4px nanpx rgba( 0, 0, 0, .25 );
+  background-color: #adacad;
+}
+
+%input {
+  // [ variables ]
+
+  // [ position ]
+
+  // [ layout ]
+  width: 75%;
+  margin: 10px 12.5% 0;
+  clear: both;
+
+  // [ skin ]
+  height: 50.6px;
+  background-color: rgba( 224, 224, 224, .4 );
+  border: {
+    width: 0 0 0 5.6px;
+    style: solid;
+    radius: 3px;
+    color: #999999;
+  }
+}
+
+%placeholder {
+  // [ position ]
+  position: relative;
+  left: 13.2px;
+
+  // [ skin ]
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: #757575;
+  font: {
+    family: notosanscjktc;
+    size: 18px;
+    weight: normal;
+    style: normal;
+    stretch: normal;
+  }
+}

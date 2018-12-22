@@ -67,6 +67,7 @@
   "homepage": "https://github.com/toolbuddy/NCKU-CSIE-Website#readme",
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
+    "body-parser": "^1.18.3",
     "deep-freeze": "0.0.1",
     "express": "^4.16.4",
     "ftp": "^0.3.10",

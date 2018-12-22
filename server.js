@@ -1,6 +1,7 @@
 import path from 'path';
 
 import express from 'express';
+import bodyParser from 'body-parser';
 
 import { port, projectRoot, } from 'settings/server/config.js';
 import language from 'settings/language/middleware';
@@ -18,6 +19,8 @@ const server = express();
  */
 
 server.listen( port );
+server.use( bodyParser.json() );
+server.use( bodyParser.urlencoded( { extended: true, } ) );
 
 /**
  * Set HTML template engine.

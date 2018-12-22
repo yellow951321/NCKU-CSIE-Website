@@ -1,0 +1,156 @@
+@import 'components/common/reset';
+@import 'components/common/header';
+@import 'components/common/footer';
+@import 'login/extend';
+
+body {
+  > .content {
+    // block
+    // `body > .content > .left_section`
+    > .left_section {
+      // [ customized ]
+      @extend %section;
+    }
+
+    // block
+    // `body > .content > .right_section`
+
+    > .right_section {
+      // [ customized ]
+      @extend %section;
+    }
+
+    // block
+    // `body > .content > .login`
+    > .login {
+      // [ customized ]
+      @extend %login_template;
+
+      // element
+      // `body > .content > .login > .login__title`
+      > .login__title {
+        // [ layouts ]
+        margin: 16 / 16 * 1rem  0 0;
+
+        // [ Font ]
+        font: {
+          family: notosanscjktc;
+          size: 24px;
+          weight: bold;
+          style: normal;
+          stretch: normal;
+        }
+        text-align: center;
+        line-height: normal;
+        letter-spacing: normal;
+      }
+
+      // element
+      // `body > .content > .login > .login__reminder`
+      > .login__reminder {
+        // [ extends ]
+
+        // [ Font ]
+        %font {
+          Font: {
+            family: notosanscjktc;
+            size: 14px;
+            weight: normal;
+            style: normal;
+            stretch: normal;
+          }
+          line-height: 1.71;
+          letter-spacing: normal;
+          color: #757575;
+        }
+
+        // modifier
+        // `body > .content > .login > .login__reminder--1`
+        &--1 {
+          // [ layout ]
+          margin: 16 / 16 * 1rem  0 0;
+
+          // [ font ]
+          Font: {
+            family: notosanscjktc;
+            size: 14px;
+            weight: normal;
+            style: normal;
+            stretch: normal;
+          }
+          text-align: center;
+          line-height: 1.71;
+          letter-spacing: normal;
+          color: #757575;
+        }
+
+        // modifier
+        // `body > .content > .login > .login__reminder--1`
+        &--2 {
+          // [ layout ]
+          margin: 0 / 16 * 1rem  0 0;
+
+          // [ font ]
+          Font: {
+            family: notosanscjktc;
+            size: 14px;
+            weight: normal;
+            style: normal;
+            stretch: normal;
+          }
+          text-align: center;
+          line-height: 1.71;
+          letter-spacing: normal;
+          color: #757575;
+
+          > a {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      // element
+      // `body > .content > .login > .login__input`
+      > .login__input {
+        // [ customization ]
+
+        // modifier
+        // `body > .content > .login > .login__input--verify_code
+        &--verify_code {
+          @extend %input;
+          margin-top: 8 / 16 * 1rem;
+        }
+      }
+
+      // element
+      // `body > .content > .login > .login__sumbit_button`
+      > .login__submit_button {
+        // [ position ]
+
+        // [ Layout ]
+        width: 75%;
+        margin: 8 / 16 * 1rem 12.5% 0;
+
+        // [ customization ]
+        @extend %button;
+
+        // [ skin ]
+        height: 50.6px;
+
+        // [ Font ]
+        font: {
+          family: notosanscjktc;
+          size: 18px;
+          stretch: normal;
+          weight: normal;
+          style: normal;
+        }
+      }
+    }
+  }
+}
+
+// Placeholders' setting
+::placeholder {
+  @extend %placeholder;
+}

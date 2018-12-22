@@ -1,0 +1,130 @@
+@import 'components/common/reset';
+@import 'components/common/header';
+@import 'components/common/footer';
+@import 'login/extend';
+
+// block
+// `.login`
+.login {
+  // [ position ]
+  position: relative;
+  top: 212.6px;
+
+  // [ layout ]
+  margin: 0 auto 500px;
+  clear: both;
+
+  // [ skin ]
+  width: 483px;
+  height: 520.4px;
+  background-color: rgba( 224, 224, 224, .1 );
+  border: {
+    width: 5.6px 0 0;
+    style: solid;
+    color: #999999;
+    radius: 3px;
+  }
+
+  // element
+  // `.login > .login__title`
+  > .login__title {
+    // layouts
+    position: absolute;
+    left: 214px;
+    top: 15px;
+  }
+
+  > .login__input {
+    // [ customization ]
+
+    // modifier
+    // `> .login > .login__input--account
+    &--account {
+      @extend %input;
+      top: 109px;
+
+      ::after {
+        clear: both;
+      }
+    }
+
+    &--password {
+      @extend %input;
+      bottom: 288.9px;
+
+      ::after {
+        clear: both;
+      }
+    }
+  }
+
+  // element
+  // `login > .login__forgetPassword`
+  > .login__forgetPassword {
+    // [ posiiton ]
+    position: absolute;
+    left: 86.5px;
+    bottom: 240.6px;
+
+    // [ skin ]
+    width: 70.8px;
+    height: 27px;
+    line-height: 1.71;
+    letter-spacing: normal;
+    color: #399dff;
+    font: {
+      style: normal;
+      family: notosanscjktc;
+      size: 14px;
+      weight: normal;
+      stretch: normal;
+    }
+  }
+
+  // element
+  // `login > .login__verification`
+  > .login__verification {
+    // [ position ]
+    position: absolute;
+    left: 50%;
+    margin-left: -157.8px;
+
+    // [ skin ]
+    background-color: #399dff;
+    width: 315.6px;
+    height: 82px;
+    bottom: 137.1px;
+  }
+
+  > .login__loginButton {
+    // [ position ]
+    bottom: 52.8px;
+    left: 50%;
+    margin-left: -179.7px;
+
+    // [ customization ]
+    @extend %button;
+
+    // .login__loginButton > .text
+    > .text {
+      // [ skin ]
+      width: 40.4px;
+      height: 30.3px;
+      line-height: normal;
+      letter-spacing: normal;
+      color: #ffffff;
+      font: {
+        family: notosanscjktc;
+        size: 18px;
+        stretch: normal;
+        weight: normal;
+        style: normal;
+      }
+    }
+  }
+}
+
+// Placeholders' setting
+::placeholder {
+  @extend %placeholder;
+}

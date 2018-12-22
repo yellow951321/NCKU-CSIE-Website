@@ -52,7 +52,13 @@ export default {
 
         // Route `home`
         'home/index': path.join( jsSrcRoot, 'home/index.js' ),
-        'home/login': path.join( jsSrcRoot, 'home/login.js' ),
+
+        // Route `login`
+        'login/index':         path.join( jsSrcRoot, 'login/index.js' ),
+        'login/error':         path.join( jsSrcRoot, 'login/error.js' ),
+        'login/forget':        path.join( jsSrcRoot, 'login/forget.js' ),
+        'login/account_error': path.join( jsSrcRoot, 'login/account_error.js' ),
+        'login/verify':        path.join( jsSrcRoot, 'login/verify.js' ),
 
         // Route `research`
         'research/groups':       path.join( jsSrcRoot, 'research/groups.js' ),

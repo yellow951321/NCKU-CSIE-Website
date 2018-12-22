@@ -1,0 +1,51 @@
+extends /layouts/home.pug
+
+append data
+  -
+    const i18n = Object.freeze( {
+      'en-US': {
+        'title': 'Forget password',
+        'account': 'Account',
+        'button_word': 'Submit',
+        'description': 'We will send verification code to your e-mail',
+        'reminder': 'If you lost your account, please contact ',
+        'administration_staff': 'administration staff',
+      },
+      'zh-TW': {
+        'title': '忘記密碼',
+        'account': '帳號',
+        'button_word': '送出',
+        'description': '我們將寄出驗證碼信件至您的信箱',
+        'reminder': '若您遺忘帳號，請聯絡',
+        'administration_staff': '行政人員',
+      },
+    } );
+    const currentRoute = '';
+
+append title
+  +title( i18n[ language ].title )
+
+append stylesheets
+  +css( '/login/forget' )
+
+append header
+
+append content
+  section.left_section
+
+  form.login( method = 'post', action = '/login/forget' )
+    h1.login__title= i18n[ language ].title
+    p.login__description= i18n[ language ].description
+    input.login__input--account( type = 'text', name = 'account', placeholder = i18n[ language ].account )
+    input.login__submit_button( type = 'submit', value = i18n[ language ].button_word )
+    p.login__reminder= i18n[ language ].reminder
+      a.text(href='')= i18n[ language ].administration_staff
+
+
+
+  section.right_section
+
+append footer
+
+append scripts
+  +js( 'login/forget' )

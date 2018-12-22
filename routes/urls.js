@@ -5,6 +5,7 @@
  * - home:         `/`
  * - about:        `/about`
  * - announcement: `/announcement`
+ * - login:        `/login`
  * - research:     `/research`
  * - resource:     `/resource`
  * - student:      `/student`
@@ -15,6 +16,7 @@ import express from 'express';
 
 import about from 'routes/about.js';
 import announcement from 'routes/announcement.js';
+import login from 'routes/login.js';
 import home from 'routes/home.js';
 import research from 'routes/research.js';
 import resource from 'routes/resource.js';
@@ -40,6 +42,12 @@ router.use( '/about', about );
  */
 
 router.use( '/announcement', announcement );
+
+/**
+ * Resolve URL `/login`.
+ */
+
+router.use( '/login', login );
 
 /**
  * Resolve URL `/research`.

@@ -1,0 +1,136 @@
+@import 'components/common/reset';
+@import 'components/common/header';
+@import 'components/common/footer';
+@import 'login/extend';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  > .content {
+    // block
+    // `body > .content > .left_section`
+    > .left_section {
+      // [ customized ]
+      @extend %section;
+    }
+
+    // block
+    // `body > .content > .right_section`
+    > .right_section {
+      // [ customized ]
+      @extend %section;
+    }
+
+    // block
+    // `body > .content > .login`
+    > .login {
+      // [ customized ]
+      @extend %login_template;
+
+      // element
+      // `body > .content > .login > .login__title`
+      > .login__title {
+        // layouts
+        text-align: center;
+        margin: 34.8px 0 0;
+
+        font: {
+          family: notosanscjktc;
+          size: 24px;
+          weight: bold;
+          style: normal;
+          stretch: normal;
+        }
+        line-height: normal;
+        letter-spacing: normal;
+      }
+
+      > .login__input {
+        // [ customization ]
+
+        // modifier
+        // `body > .content > .login > .login__input--account
+        &--account {
+          @extend %input;
+          margin-top: 33.7px;
+        }
+
+        // modifier
+        // `body > .content > .login > .login__input--password
+        &--password {
+          @extend %input;
+          margin-top: 21.4px;
+        }
+      }
+
+      // element
+      // body > .content > .login > .login__forgetPassword`
+      > .login__forget_password {
+        // [ posiiton ]
+
+        // [ Layout ]
+        width: 40%;
+        margin: 21.4px 40% 0 20%;
+
+        // [ skin ]
+        height: 27px;
+        line-height: 1.71;
+        letter-spacing: normal;
+        color: #399dff;
+        font: {
+          style: normal;
+          family: notosanscjktc;
+          size: 14px;
+          weight: normal;
+          stretch: normal;
+        }
+      }
+
+      // element
+      // `body > .content > .login > .login__verification`
+      > .login__verification {
+        // [ position ]
+
+        // [ Layout ]
+        width: 60%;
+        margin: 21.4px 20% 0;
+
+        // [ skin ]
+        background-color: #399dff;
+        height: 82px;
+      }
+
+      // element
+      // `body > .content > .login > .login__login_button`
+      > .login__login_button {
+        // [ position ]
+
+        // [ Layout ]
+        width: 75%;
+        margin: 33.7px 12.5% 52.8px;
+
+        // [ customization ]
+        @extend %button;
+
+        // [ skin ]
+        height: 50.6px;
+
+        // [ Font ]
+        font: {
+          family: notosanscjktc;
+          size: 18px;
+          stretch: normal;
+          weight: normal;
+          style: normal;
+        }
+      }
+    }
+  }
+}
+
+// Placeholders' setting
+::placeholder {
+  @extend %placeholder;
+}
