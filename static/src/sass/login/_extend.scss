@@ -1,75 +1,112 @@
-%section {
-  // [ position ]
-  width: 40%;
-  float: left;
-  border: 2px solid white;
+body {
+  > .content {
+    display: grid;
+    grid-template-columns: auto;
+  }
 }
+
+// [ variable ]
+$large: 430px;
 
 %login_template {
   // [ position ]
-  width: 20%;
-  float: left;
+  width: 430 / 32 * 1rem;
 
   // [ layout ]
-  margin: 212.6px 0 300px;
+  margin: 234 / 32 * 1rem auto 423 / 32 * 1rem;
+
+  // [ RWD: $large ]
+  @media only screen and ( max-width: $large ) {
+    width: 100%;
+  }
 
   // [ skin ]
   background-color: rgba( 224, 224, 224, .1 );
   border: {
-    width: 5.6px 0 0;
+    width: 1px;
     style: solid;
-    color: #999999;
+    color: rgba( 117, 117, 117, .1 );
     radius: 3px;
+    top: 5 / 32 * 1rem solid #999999;
   }
-}
-
-%button {
-  // [ position ]
-
-  // [ skin ]
-  border: {
-    radius: 3px;
-    style: none;
-  }
-  box-shadow: 0 4px 4px nanpx rgba( 0, 0, 0, .25 );
-  background-color: #adacad;
 }
 
 %input {
-  // [ variables ]
-
-  // [ position ]
-
   // [ layout ]
-  width: 75%;
-  margin: 10px 12.5% 0;
-  clear: both;
+  margin-left: 56.8 / 32 * 1rem;
 
   // [ skin ]
-  height: 50.6px;
+  height: 45 / 32 * 1rem;
+  width: 320 / 32 * 1rem;
+  padding-left: 13.2 / 32 * 1rem;
   background-color: rgba( 224, 224, 224, .4 );
   border: {
-    width: 0 0 0 5.6px;
+    left-width: 5 / 32 * 1rem;
     style: solid;
-    radius: 3px;
+    radius: 3 / 32 * 1rem;
     color: #999999;
+  }
+  font: {
+    family: notosanscjktc;
+    size: 18 / 32 * 1rem;
+    weight: normal;
+    style: normal;
+    stretch: normal;
+  }
+
+  // [ RWD: $large ]
+  @media only screen and ( max-width: $large ) {
+    width: 279 / 375 * 100%;
+    margin-left: 48 / 375 * 100%;
   }
 }
 
 %placeholder {
   // [ position ]
-  position: relative;
-  left: 13.2px;
+  // position: relative;
+  // left: 13 / 32 * 1rem;
+  // bottom: 5 / 32 * 1rem;
 
   // [ skin ]
-  line-height: 1.33;
-  letter-spacing: normal;
-  color: #757575;
+  width: 81 / 32 * 1rem;
   font: {
     family: notosanscjktc;
-    size: 18px;
+    size: 18 / 32 * 1rem;
     weight: normal;
     style: normal;
     stretch: normal;
+  }
+  letter-spacing: normal;
+  color: #757575;
+}
+
+%button {
+  // [ layout ]
+  margin: {
+    left: 54 / 32 * 1rem;
+    right: 56 / 32 * 1rem;
+  }
+
+  // [ skin ]
+  width: 320 / 32 * 1rem;
+  height: 45 / 32 * 1rem;
+  border: {
+    radius: 3 / 32 * 1rem;
+    style: none;
+  }
+  background-color: #adacad;
+  color: #ffffff;
+  font: {
+    family: notosanscjktc;
+    size: 18 / 32 * 1rem;
+    stretch: normal;
+    weight: normal;
+    style: normal;
+  }
+
+  // [ RWD: $large ]
+  @media only screen and ( max-width: $large ) {
+    width: 279 / 375 * 100%;
+    margin-left: 48 / 375 * 100%;
   }
 }

@@ -10,6 +10,7 @@ import express from 'express';
 
 import announcement from 'apis/announcement.js';
 import faculty from 'apis/faculty.js';
+import auth from 'apis/auth.js';
 
 const apis = express.Router();
 
@@ -24,5 +25,11 @@ apis.use( '/announcement', announcement );
  */
 
 apis.use( '/faculty', faculty );
+
+/**
+ * Resolve URL `/api/auth`.
+ */
+
+apis.use( '/auth', auth );
 
 export default apis;

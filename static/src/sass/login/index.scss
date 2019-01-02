@@ -3,134 +3,636 @@
 @import 'components/common/footer';
 @import 'login/extend';
 
-* {
-  box-sizing: border-box;
-}
-
 body {
   > .content {
     // block
-    // `body > .content > .left_section`
-    > .left_section {
-      // [ customized ]
-      @extend %section;
-    }
-
-    // block
-    // `body > .content > .right_section`
-    > .right_section {
-      // [ customized ]
-      @extend %section;
-    }
-
-    // block
     // `body > .content > .login`
     > .login {
+      // [ variable ]
+      $large: 483px;
+
       // [ customized ]
       @extend %login_template;
+
+      // [ skin ]
+      width: 483 / 32 * 1rem;
+
+      // modifier
+      // `.body > .content > .login--hidden
+      &--hidden {
+        display: none;
+      }
+
+      // [ RWD: $large ]
+      @media only screen and ( max-width: $large ) {
+        width: 100%;
+      }
 
       // element
       // `body > .content > .login > .login__title`
       > .login__title {
-        // layouts
-        text-align: center;
-        margin: 34.8px 0 0;
+        // [ layouts ]
+        margin-top: 34.8 / 32 * 1rem;
 
+        // [ skin ]
         font: {
           family: notosanscjktc;
-          size: 24px;
+          size: 24 / 32 * 1rem;
           weight: bold;
           style: normal;
           stretch: normal;
         }
+        text-align: center;
         line-height: normal;
         letter-spacing: normal;
       }
 
       > .login__input {
         // [ customization ]
+        @extend %input;
+
+        // [ skin ]
+        width: 359.4 / 32 * 1rem;
+
+        &::placeholder {
+          @extend %placeholder;
+        }
+
+        // [ RWD: 483px ]
+        @media only screen and ( max-width: 483px ) {
+          width: 74%;
+          margin-left: 13%;
+        }
 
         // modifier
         // `body > .content > .login > .login__input--account
         &--account {
-          @extend %input;
-          margin-top: 33.7px;
+          margin-top: 33.7 / 32 * 1rem;
         }
 
         // modifier
         // `body > .content > .login > .login__input--password
         &--password {
-          @extend %input;
-          margin-top: 21.4px;
+          margin-top: 21.4 / 32 * 1rem;
         }
       }
 
       // element
-      // body > .content > .login > .login__forgetPassword`
-      > .login__forget_password {
-        // [ posiiton ]
-
-        // [ Layout ]
-        width: 40%;
-        margin: 21.4px 40% 0 20%;
+      // `body > .content > .login > .login__reset`
+      > .login__reset {
+        // [ layout ]
+        margin-top: 22 / 32 * 1rem;
 
         // [ skin ]
-        height: 27px;
+        font: {
+          family: notosanscjktc;
+          size: 14 / 32 * 1rem;
+          weight: normal;
+          style: normal;
+          stretch: normal;
+        }
+        text-align: center;
+        line-height: 1.71;
+        letter-spacing: normal;
+        color: #6982c0;
+
+        // modifier
+        // `body > .content > .login > .login__reset--hidden`
+        &--hidden {
+          display: none;
+        }
+      }
+
+      // element
+      // `body > .content > .login > .login__forget`
+      > .login__forget {
+        // [ layout ]
+        margin: {
+          top: 21.4 / 32 * 1rem;
+          right: auto;
+          left: 86.5 / 32 * 1rem;
+        }
+
+        // [ skin ]
+        width: 70.8 / 32 * 1rem;
+        height: 27 / 32 * 1rem;
         line-height: 1.71;
         letter-spacing: normal;
         color: #399dff;
         font: {
           style: normal;
           family: notosanscjktc;
-          size: 14px;
+          size: 14 / 32 * 1rem;
           weight: normal;
           stretch: normal;
+        }
+
+        // modifier
+        // `body > .content > .login > .login__forget--hidden`
+        &--hidden {
+          display: none;
+        }
+
+        // [ RWD: $large ]
+        @media only screen and ( max-width: $large ) {
+          width: 68 / 375 * 100%;
+          margin-left: 66 / 375 * 100%;
         }
       }
 
       // element
       // `body > .content > .login > .login__verification`
       > .login__verification {
-        // [ position ]
-
         // [ Layout ]
-        width: 60%;
-        margin: 21.4px 20% 0;
+        width: 315.6 / 32 * 1rem;
+        height: 82 / 32 * 1rem;
+        margin: 21.4 / 32 * 1rem auto 0 83.1 / 32 * 1rem;
 
         // [ skin ]
         background-color: #399dff;
-        height: 82px;
+
+        // [ RWD: $large ]
+        @media only screen and ( max-width: $large ) {
+          width: 245 / 375 * 100%;
+          margin-left: 64.6 / 375 * 100%;
+        }
+      }
+
+      // element
+      // `body > .content > .login > .login__error_message`
+      > .login__error {
+        // [ layout ]
+        margin-top: 14 / 32 * 1rem;
+        text-align: center;
+
+        // [ skin ]
+        font: {
+          family: notosanscjktc;
+          size: 14 / 32 * 1rem;
+          weight: normal;
+          style: normal;
+          stretch: normal;
+        }
+        line-height: 1.71;
+        letter-spacing: normal;
+        color: #d60b38;
+
+        // modifier
+        // `body > .content > .login > .login__error_message--hidden`
+        &--hidden {
+          display: none;
+        }
       }
 
       // element
       // `body > .content > .login > .login__login_button`
-      > .login__login_button {
-        // [ position ]
-
+      > .login__button {
         // [ Layout ]
-        width: 75%;
-        margin: 33.7px 12.5% 52.8px;
+        margin: {
+          top: 33.6 / 32 * 1rem;
+          bottom: 52.8 / 32 * 1rem;
+          left: 61.8 / 32 * 1rem;
+        }
 
         // [ customization ]
         @extend %button;
 
         // [ skin ]
-        height: 50.6px;
-
-        // [ Font ]
+        height: 50.6 / 32 * 1rem;
+        width: 359.4 / 32 * 1rem;
         font: {
           family: notosanscjktc;
-          size: 18px;
+          size: 18 / 32 * 1rem;
           stretch: normal;
           weight: normal;
           style: normal;
         }
+
+        // [ RWD: $large ]
+        @media only screen and ( max-width: $large ) {
+          width: 279 / 375 * 100%;
+          margin-left: 48 / 375 * 100%;
+        }
+
+        // modifier
+        // `body > .content > .login > .login__login_button--valid`
+        &--valid {
+          // [ skin ]
+          background-color: #213262;
+
+          // [ hover ]
+          &:hover {
+            background-color: #ffffff;
+            color: #213262;
+          }
+        }
+      }
+    }
+
+    // block
+    // `body > .content > .login > .forget`
+    > .forget {
+      // [ customized ]
+      @extend %login_template;
+
+      // modifier
+      // `body > .content > .login > .forget--hidden`
+      &--hidden {
+        display: none;
+      }
+
+      // element
+      // `body > .content > .login > .forget > .forget__title`
+      > .forget__title {
+        // [ layouts ]
+        margin-top: 32 / 32 * 1rem;
+
+        // [ skin ]
+        font: {
+          family: notosanscjktc;
+          size: 24 / 32 * 1rem;
+          weight: bold;
+          style: normal;
+          stretch: normal;
+        }
+        text-align: center;
+        line-height: normal;
+        letter-spacing: normal;
+      }
+
+      // element
+      // `body > .content > .login > .forget > .forget__description`
+      > .forget__description {
+        // [ layout ]
+        margin-top: 24 / 32 * 1rem;
+
+        // [ skin ]
+        Font: {
+          family: notosanscjktc;
+          size: 14 / 32 * 1rem;
+          weight: normal;
+          style: normal;
+          stretch: normal;
+        }
+        text-align: center;
+        line-height: 1.71;
+        letter-spacing: normal;
+        color: #757575;
+      }
+
+      // element
+      // `body > .content > .login > .forget > .forget__input`
+      > .forget__input {
+        // [ customization ]
+
+        // modifier
+        // `body > .content > .login > .forget > .forget__input--account
+        &--account {
+          @extend %input;
+          margin-top: 18 / 32 * 1rem;
+        }
+
+        // Placeholders' setting
+        &::placeholder {
+          @extend %placeholder;
+        }
+      }
+
+      // element
+      // `body > .content > .login > .forget > .forget__button`
+      > .forget__button {
+        // [ layout ]
+        margin-top: 27 / 32 * 1rem;
+
+        // [ customization ]
+        @extend %button;
+
+        // modifier
+        // `body > .content > .login > .forget > .forget__button--valid`
+        &--valid {
+          // [ skin ]
+          background-color: #213262;
+
+          // [ hover ]
+          &:hover {
+            background-color: #ffffff;
+            color: #213262;
+          }
+        }
+      }
+
+      // element
+      // `body > .content > .login > .forget > .forget__error`
+      > .forget__error {
+        // [ layout ]
+        margin-top: 14 / 32 * 1rem;
+
+        // [ font ]
+        Font: {
+          family: notosanscjktc;
+          size: 14 / 32 * 1rem;
+          weight: normal;
+          style: normal;
+          stretch: normal;
+        }
+        text-align: center;
+        line-height: 1.71;
+        letter-spacing: normal;
+        color: #d60b38;
+
+        &--hidden {
+          display: none;
+        }
+      }
+
+      // element
+      // `body > .content > .login > .forget > .forget__reminder`
+      > .forget__reminder {
+        // [ layout ]
+        margin: {
+          top: 57 / 32 * 1rem;
+          bottom: 27 / 32 * 1rem;
+        }
+
+        // [ skin ]
+        height: 24 / 32 * 1rem;
+
+        // [ font ]
+        Font: {
+          family: notosanscjktc;
+          size: 14 / 32 * 1rem;
+          weight: normal;
+          style: normal;
+          stretch: normal;
+        }
+        text-align: center;
+        line-height: 1.71;
+        letter-spacing: normal;
+        color: #213262;
+
+        // `body > .content > .login > .forget > .forget__reminder > a`
+        > a {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    // block
+    // `body > .content > .login > .verify
+    > .verify {
+      // [ customized ]
+      @extend %login_template;
+
+      // modifier
+      // `body > .content > .login > .verify.--hidden`
+      &--hidden {
+        display: none;
+      }
+
+      // element
+      // `body > .content > .login > .verify > .verify__title`
+      > .verify__title {
+        // [ layouts ]
+        margin: 32 / 32 * 1rem  0 0;
+
+        // [ skin ]
+        font: {
+          family: notosanscjktc;
+          size: 24 / 32 * 1rem;
+          weight: bold;
+          style: normal;
+          stretch: normal;
+        }
+        text-align: center;
+        line-height: normal;
+        letter-spacing: normal;
+      }
+
+      // element
+      // `body > .content > .login > .verify > .verify__reminder`
+      > .verify__reminder {
+        // modifier
+        // `body > .content > .login > .verify > .verify__reminder--1`
+        &--1 {
+          // [ layout ]
+          margin-top: 22 / 32 * 1rem;
+          text-align: center;
+
+          // [ skin ]
+          Font: {
+            family: notosanscjktc;
+            size: 14 / 32 * 1rem;
+            weight: normal;
+            style: normal;
+            stretch: normal;
+          }
+          line-height: 1.71;
+          letter-spacing: normal;
+          color: #757575;
+        }
+
+        // modifier
+        // `body > .content > .login > .verify > .verify__reminder--2`
+        &--2 {
+          // [ layout ]
+          margin-top: 6 / 32 * 1rem;
+          text-align: center;
+
+          // [ skin ]
+          Font: {
+            family: notosanscjktc;
+            size: 14 / 32 * 1rem;
+            weight: normal;
+            style: normal;
+            stretch: normal;
+          }
+          line-height: 1.71;
+          letter-spacing: normal;
+          color: #757575;
+
+          > a {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      // element
+      // `body > .content > .login > .verify > .verify__verify`
+      > .verify__verify {
+        // [ customizeation ]
+        @extend %input;
+
+        // [ layout ]
+        margin-top: 22 / 32 * 1rem;
+
+        // Placeholders' setting
+        &::placeholder {
+          @extend %placeholder;
+        }
+      }
+
+      // element
+      // `body > .content > .login > .verify > .verify__error`
+      > .verify__error {
+        // [ layout ]
+        margin-top: 14 / 32 * 1rem;
+
+        // [ skin ]
+        Font: {
+          family: notosanscjktc;
+          size: 14 / 32 * 1rem;
+          weight: normal;
+          style: normal;
+          stretch: normal;
+        }
+        text-align: center;
+        line-height: 1.71;
+        letter-spacing: normal;
+        color: #d60b38;
+
+        // modifier
+        // `body > .content > .login > .verify > .verify__error--hidden`
+        &--hidden {
+          display: none;
+        }
+      }
+
+      // element
+      // `body > .content > .login > .verify > .verify__sumbit_button`
+      > .verify__button {
+        // [ position ]
+
+        // [ Layout ]
+        margin: {
+          top: 33.6 / 32 * 1rem;
+          bottom: 52.8 / 32 * 1rem;
+        }
+
+        // [ customization ]
+        @extend %button;
+
+        // modifier
+        // `body > .content > .login > .verify > .verify__button--valid`
+        &--valid {
+          // [ skin ]
+          background-color: #213262;
+
+          // [ hover ]
+          &:hover {
+            background-color: #ffffff;
+            color: #213262;
+          }
+        }
+      }
+    }
+
+    // block
+    // `.body > .content  > .reset`
+    > .reset {
+      // [ customized ]
+      @extend %login_template;
+
+      // modifier
+      // `.body > .content > .login > .reset`
+      &--hidden {
+        display: none;
+      }
+
+      // element
+      // `body > .content > .login > .reset > .reset__title`
+      > .reset__title {
+        // [ layouts ]
+        margin-top: 32 / 32 * 1rem;
+
+        // [ skin ]
+        font: {
+          family: notosanscjktc;
+          size: 24 / 32 * 1rem;
+          weight: bold;
+          style: normal;
+          stretch: normal;
+        }
+        text-align: center;
+        line-height: normal;
+        letter-spacing: normal;
+      }
+
+      // element
+      // `body > .content > .login > .reset > .reset__input`
+      > .reset__input {
+        // [ customization ]
+        @extend %input;
+
+        // [ layout ]
+        margin-top: 33 / 32 * 1rem;
+
+        // modifier
+        // `body > .content > .login > .reset > .reset__input--check`
+        &--check {
+          // [ customization ]
+          @extend %input;
+
+          // [ layout ]
+          margin-top: 18 / 32 * 1rem;
+        }
+
+        // Placeholders' setting
+        &::placeholder {
+          @extend %placeholder;
+        }
+      }
+
+      // element
+      // `body > .content > .login > .reset > .reset__error`
+      > .reset__error {
+        // [ layout ]
+        margin-top: 14 / 32 * 1rem;
+
+        // [ skin ]
+        Font: {
+          family: notosanscjktc;
+          size: 14 / 32 * 1rem;
+          weight: normal;
+          style: normal;
+          stretch: normal;
+        }
+        text-align: center;
+        line-height: 1.71;
+        letter-spacing: normal;
+        color: #d60b38;
+
+        // modifier
+        // `body > .content > .login > .reset > .reset__error--hidden`
+        &--hidden {
+          display: none;
+        }
+      }
+
+      // element
+      // `body > .content > .login > .reset > .reset__button`
+      > .reset__button {
+        // [ layout ]
+        margin: {
+          top: 33.6 / 32 * 1rem;
+          bottom: 52.8 / 32 * 1rem;
+        }
+
+        // [ customization ]
+        @extend %button;
+
+        // modifier
+        // `body > .content > .login > .reset > .reset__button--valid`
+        &--valid {
+          // [ skin ]
+          background-color: #213262;
+
+          // [ hover ]
+          &:hover {
+            background-color: #ffffff;
+            color: #213262;
+          }
+        }
       }
     }
   }
-}
-
-// Placeholders' setting
-::placeholder {
-  @extend %placeholder;
 }

@@ -66,11 +66,7 @@ export default {
         'home/index': path.join( sassRoot, 'home/index.scss' ),
 
         // Route `login`
-        'login/index':         path.join( sassRoot, 'login/index.scss' ),
-        'login/error':         path.join( sassRoot, 'login/error.scss' ),
-        'login/forget':        path.join( sassRoot, 'login/forget.scss' ),
-        'login/account_error': path.join( sassRoot, 'login/account_error.scss' ),
-        'login/verify':        path.join( sassRoot, 'login/verify.scss' ),
+        'login/index':          path.join( sassRoot, 'login/index.scss' ),
 
         // Route `research`
         'research/index':        path.join( sassRoot, 'research/index.scss' ),

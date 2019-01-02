@@ -54,11 +54,7 @@ export default {
         'home/index': path.join( jsSrcRoot, 'home/index.js' ),
 
         // Route `login`
-        'login/index':         path.join( jsSrcRoot, 'login/index.js' ),
-        'login/error':         path.join( jsSrcRoot, 'login/error.js' ),
-        'login/forget':        path.join( jsSrcRoot, 'login/forget.js' ),
-        'login/account_error': path.join( jsSrcRoot, 'login/account_error.js' ),
-        'login/verify':        path.join( jsSrcRoot, 'login/verify.js' ),
+        'login/index':          path.join( jsSrcRoot, 'login/index.js' ),
 
         // Route `research`
         'research/index':        path.join( jsSrcRoot, 'research/index.js' ),
