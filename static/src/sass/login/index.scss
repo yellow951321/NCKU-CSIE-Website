@@ -1,41 +1,163 @@
 @import 'components/common/reset';
 @import 'components/common/header';
 @import 'components/common/footer';
-@import 'login/extend';
 
+// block
+// `body`
 body {
+  // block
+  // `body > .content`
   > .content {
+    // [ variable ]
+    $large: 430px;
+
+    // [ template ]
+    %login {
+      // [ layout ]
+      margin: 234 / 32 * 1rem auto 423 / 32 * 1rem;
+
+      // [ skin ]
+      width: 100%;
+      background-color: rgba( 224, 224, 224, .1 );
+      border: {
+        width: 1 / 32 * 1rem;
+        style: solid;
+        color: rgba( 117, 117, 117, .1 );
+        radius: 3px;
+        top: 5 / 32 * 1rem solid #999999;
+      }
+
+      // [ RWD: $large ]
+      @media only screen and ( min-width: $large ) {
+        // [ skin ]
+        width: 430 / 32 * 1rem;
+      }
+    }
+
+    // [ template ]
+    %input {
+      // [ layout ]
+      margin-left: 48 / 375 * 100%;
+
+      // [ skin ]
+      width: 279 / 375 * 100%;
+      height: 45 / 32 * 1rem;
+      padding-left: 13.2 / 32 * 1rem;
+      background-color: rgba( 224, 224, 224, .4 );
+      border: {
+        left-width: 5 / 32 * 1rem;
+        style: solid;
+        radius: 3 / 32 * 1rem;
+        color: #999999;
+      }
+      font: {
+        // @TODO: fix font
+        family: notosanscjktc;
+        size: 18 / 32 * 1rem;
+        weight: normal;
+        style: normal;
+        stretch: normal;
+      }
+
+      // [ RWD: $large ]
+      @media only screen and ( min-width: $large ) {
+        // [ layout ]
+        margin-left: 56.8 / 32 * 1rem;
+
+        // [ skin ]
+        width: 320 / 32 * 1rem;
+      }
+    }
+
+    // [ template ]
+    %placeholder {
+      // [ skin ]
+      width: 81 / 32 * 1rem;
+      font: {
+        // @TODO: fix font
+        family: notosanscjktc;
+        size: 18 / 32 * 1rem;
+        weight: normal;
+        style: normal;
+        stretch: normal;
+      }
+      letter-spacing: normal;
+      color: #757575;
+    }
+
+    // [ template ]
+    %button {
+      // [ layout ]
+      margin: {
+        left: 48 / 375 * 100%;
+        right: 56 / 32 * 1rem;
+      }
+
+      // [ skin ]
+      width: 279 / 375 * 100%;
+      height: 45 / 32 * 1rem;
+      border: {
+        radius: 3 / 32 * 1rem;
+        style: none;
+      }
+      background-color: #adacad;
+      color: #ffffff;
+      font: {
+        // @TODO: fix font
+        family: notosanscjktc;
+        size: 18 / 32 * 1rem;
+        stretch: normal;
+        weight: normal;
+        style: normal;
+      }
+
+      // [ RWD: $large ]
+      @media only screen and ( min-width: $large ) {
+        // [ layout ]
+        margin-left: 54 / 32 * 1rem;
+
+        // [ skin ]
+        width: 320 / 32 * 1rem;
+      }
+    }
+
+    // [ layout ]
+    display: grid;
+    grid-template-columns: auto;
+
     // block
     // `body > .content > .login`
     > .login {
       // [ variable ]
       $large: 483px;
 
-      // [ customized ]
-      @extend %login_template;
+      // [ template ]
+      @extend %login;
 
       // [ skin ]
-      width: 483 / 32 * 1rem;
-
-      // modifier
-      // `.body > .content > .login--hidden
-      &--hidden {
-        display: none;
-      }
+      width: 100%;
 
       // [ RWD: $large ]
-      @media only screen and ( max-width: $large ) {
-        width: 100%;
+      @media only screen and ( min-width: $large ) {
+        // [ skin ]
+        width: 483 / 32 * 1rem;
+      }
+
+      // modifier
+      // `.body > .content > .login.login--hidden`
+      &--hidden {
+        display: none;
       }
 
       // element
       // `body > .content > .login > .login__title`
       > .login__title {
-        // [ layouts ]
+        // [ layout ]
         margin-top: 34.8 / 32 * 1rem;
 
         // [ skin ]
         font: {
+          // @TODO
           family: notosanscjktc;
           size: 24 / 32 * 1rem;
           weight: bold;
@@ -47,32 +169,44 @@ body {
         letter-spacing: normal;
       }
 
+      // element
+      // `body > .content > .login > .login__input`
       > .login__input {
-        // [ customization ]
+        // [ template ]
         @extend %input;
 
-        // [ skin ]
-        width: 359.4 / 32 * 1rem;
+        // [ layout ]
+        margin-left: 13%;
 
+        // [ skin ]
+        width: 74%;
+
+        // [ placeholder ]
         &::placeholder {
+          // [ template ]
           @extend %placeholder;
         }
 
-        // [ RWD: 483px ]
-        @media only screen and ( max-width: 483px ) {
-          width: 74%;
-          margin-left: 13%;
+        // [ RWD: $large ]
+        @media only screen and ( min-width: $large ) {
+          // [ layout ]
+          margin-left: 61.8 / 32 * 1rem;
+
+          // [ skin ]
+          width: 359.4 / 32 * 1rem;
         }
 
         // modifier
-        // `body > .content > .login > .login__input--account
+        // `body > .content > .login > .login_input.login__input--account`
         &--account {
+          // [ layout ]
           margin-top: 33.7 / 32 * 1rem;
         }
 
         // modifier
-        // `body > .content > .login > .login__input--password
+        // `body > .content > .login > .login_input.login__input--password`
         &--password {
+          // [ layout ]
           margin-top: 21.4 / 32 * 1rem;
         }
       }
@@ -85,6 +219,7 @@ body {
 
         // [ skin ]
         font: {
+          // @TODO
           family: notosanscjktc;
           size: 14 / 32 * 1rem;
           weight: normal;
@@ -97,7 +232,7 @@ body {
         color: #6982c0;
 
         // modifier
-        // `body > .content > .login > .login__reset--hidden`
+        // `body > .content > .login > .login__reset.login__reset--hidden`
         &--hidden {
           display: none;
         }
@@ -110,97 +245,87 @@ body {
         margin: {
           top: 21.4 / 32 * 1rem;
           right: auto;
-          left: 86.5 / 32 * 1rem;
+          left: 66 / 375 * 100%;
         }
 
         // [ skin ]
-        width: 70.8 / 32 * 1rem;
+        width: 68 / 375 * 100%;
         height: 27 / 32 * 1rem;
         line-height: 1.71;
         letter-spacing: normal;
         color: #399dff;
         font: {
-          style: normal;
+          // @TODO
           family: notosanscjktc;
+          style: normal;
           size: 14 / 32 * 1rem;
           weight: normal;
           stretch: normal;
         }
 
+        // [ interaction ]
+        &:hover {
+          // [ skin ]
+          cursor: pointer;
+        }
+
         // modifier
-        // `body > .content > .login > .login__forget--hidden`
+        // `body > .content > .login > .login__forget.login__forget--hidden`
         &--hidden {
+          // [ layout ]
           display: none;
         }
 
         // [ RWD: $large ]
-        @media only screen and ( max-width: $large ) {
-          width: 68 / 375 * 100%;
-          margin-left: 66 / 375 * 100%;
+        @media only screen and ( min-width: $large ) {
+          // [ skin ]
+          width: 70.8 / 32 * 1rem;
         }
       }
 
       // element
       // `body > .content > .login > .login__verification`
       > .login__verification {
-        // [ Layout ]
-        width: 315.6 / 32 * 1rem;
-        height: 82 / 32 * 1rem;
-        margin: 21.4 / 32 * 1rem auto 0 83.1 / 32 * 1rem;
+        // [ layout ]
+        margin: {
+          top: 21.4 / 32 * 1rem;
+          right: auto;
+          bottom: 0;
+          left: 64.6 / 375 * 100%;
+        }
 
         // [ skin ]
+        width: 245 / 375 * 100%;
+        height: 82 / 32 * 1rem;
         background-color: #399dff;
 
         // [ RWD: $large ]
-        @media only screen and ( max-width: $large ) {
-          width: 245 / 375 * 100%;
-          margin-left: 64.6 / 375 * 100%;
+        @media only screen and ( min-width: $large ) {
+          // [ layout ]
+          margin-left: 83.1 / 32 * 1rem;
+
+          // [ skin ]
+          width: 315.6 / 32 * 1rem;
         }
       }
 
       // element
-      // `body > .content > .login > .login__error_message`
-      > .login__error {
-        // [ layout ]
-        margin-top: 14 / 32 * 1rem;
-        text-align: center;
-
-        // [ skin ]
-        font: {
-          family: notosanscjktc;
-          size: 14 / 32 * 1rem;
-          weight: normal;
-          style: normal;
-          stretch: normal;
-        }
-        line-height: 1.71;
-        letter-spacing: normal;
-        color: #d60b38;
-
-        // modifier
-        // `body > .content > .login > .login__error_message--hidden`
-        &--hidden {
-          display: none;
-        }
-      }
-
-      // element
-      // `body > .content > .login > .login__login_button`
+      // `body > .content > .login > .login__button`
       > .login__button {
+        // [ template ]
+        @extend %button;
+
         // [ Layout ]
         margin: {
           top: 33.6 / 32 * 1rem;
-          bottom: 52.8 / 32 * 1rem;
-          left: 61.8 / 32 * 1rem;
+          left: 48 / 375 * 100%;
         }
 
-        // [ customization ]
-        @extend %button;
-
         // [ skin ]
+        width: 279 / 375 * 100%;
         height: 50.6 / 32 * 1rem;
-        width: 359.4 / 32 * 1rem;
         font: {
+          // @TODO
           family: notosanscjktc;
           size: 18 / 32 * 1rem;
           stretch: normal;
@@ -209,46 +334,82 @@ body {
         }
 
         // [ RWD: $large ]
-        @media only screen and ( max-width: $large ) {
-          width: 279 / 375 * 100%;
-          margin-left: 48 / 375 * 100%;
+        @media only screen and ( min-width: $large ) {
+          // [ layout ]
+          margin-left: 61.8 / 32 * 1rem;
+
+          // [ skin ]
+          width: 359.4 / 32 * 1rem;
         }
 
         // modifier
-        // `body > .content > .login > .login__login_button--valid`
+        // `body > .content > .login > .login__button.login__button--valid`
         &--valid {
           // [ skin ]
           background-color: #213262;
 
-          // [ hover ]
+          // [ interaction ]
           &:hover {
+            // [ skin ]
             background-color: #ffffff;
             color: #213262;
           }
         }
       }
+
+      // element
+      // `body > .content > .login > .login__error`
+      > .login__error {
+        // [ layout ]
+        margin: {
+          top: 18 / 32 * 1rem;
+          bottom: 30 / 32 * 1rem;
+        }
+
+        // [ skin ]
+        color: #d60b38;
+        font: {
+          // @TODO
+          family: notosanscjktc;
+          size: 14 / 32 * 1rem;
+          weight: normal;
+          style: normal;
+          stretch: normal;
+        }
+        line-height: 1.71;
+        letter-spacing: normal;
+        text-align: center;
+
+        // modifier
+        // `body > .content > .login > .login__error.login__error--hidden`
+        &--hidden {
+          // [ skin ]
+          visibility: hidden;
+        }
+      }
     }
 
     // block
-    // `body > .content > .login > .forget`
+    // `body > .content > .forget`
     > .forget {
-      // [ customized ]
-      @extend %login_template;
+      // [ template ]
+      @extend %login;
 
       // modifier
-      // `body > .content > .login > .forget--hidden`
+      // `body > .content > .forget.forget--hidden`
       &--hidden {
         display: none;
       }
 
       // element
-      // `body > .content > .login > .forget > .forget__title`
+      // `body > .content > .forget > .forget__title`
       > .forget__title {
-        // [ layouts ]
+        // [ layout ]
         margin-top: 32 / 32 * 1rem;
 
         // [ skin ]
         font: {
+          // @TODO
           family: notosanscjktc;
           size: 24 / 32 * 1rem;
           weight: bold;
@@ -261,13 +422,15 @@ body {
       }
 
       // element
-      // `body > .content > .login > .forget > .forget__description`
+      // `body > .content > .forget > .forget__description`
       > .forget__description {
         // [ layout ]
         margin-top: 24 / 32 * 1rem;
 
         // [ skin ]
-        Font: {
+        color: #757575;
+        font: {
+          // @TODO
           family: notosanscjktc;
           size: 14 / 32 * 1rem;
           weight: normal;
@@ -277,44 +440,41 @@ body {
         text-align: center;
         line-height: 1.71;
         letter-spacing: normal;
-        color: #757575;
       }
 
       // element
-      // `body > .content > .login > .forget > .forget__input`
+      // `body > .content > .forget > .forget__input`
       > .forget__input {
-        // [ customization ]
+        // [ template ]
+        @extend %input;
 
-        // modifier
-        // `body > .content > .login > .forget > .forget__input--account
-        &--account {
-          @extend %input;
-          margin-top: 18 / 32 * 1rem;
-        }
+        // [ layout ]
+        margin-top: 18 / 32 * 1rem;
 
-        // Placeholders' setting
+        // [ placeholder ]
         &::placeholder {
           @extend %placeholder;
         }
       }
 
       // element
-      // `body > .content > .login > .forget > .forget__button`
+      // `body > .content > .forget > .forget__button`
       > .forget__button {
         // [ layout ]
         margin-top: 27 / 32 * 1rem;
 
-        // [ customization ]
+        // [ template ]
         @extend %button;
 
         // modifier
-        // `body > .content > .login > .forget > .forget__button--valid`
+        // `body > .content > .forget > .forget__button.forget__button--valid`
         &--valid {
           // [ skin ]
           background-color: #213262;
 
-          // [ hover ]
+          // [ interaction ]
           &:hover {
+            // [ skin ]
             background-color: #ffffff;
             color: #213262;
           }
@@ -322,13 +482,15 @@ body {
       }
 
       // element
-      // `body > .content > .login > .forget > .forget__error`
+      // `body > .content > .forget > .forget__error`
       > .forget__error {
         // [ layout ]
-        margin-top: 14 / 32 * 1rem;
+        margin-top: 18 / 32 * 1rem;
 
-        // [ font ]
-        Font: {
+        // [ skin ]
+        color: #d60b38;
+        font: {
+          // @TODO
           family: notosanscjktc;
           size: 14 / 32 * 1rem;
           weight: normal;
@@ -338,27 +500,30 @@ body {
         text-align: center;
         line-height: 1.71;
         letter-spacing: normal;
-        color: #d60b38;
 
+        // modifier
+        // `body > .content > .forget > .forget__error.forget__error--hidden`
         &--hidden {
-          display: none;
+          visibility: hidden;
         }
       }
 
       // element
-      // `body > .content > .login > .forget > .forget__reminder`
-      > .forget__reminder {
+      // `body > .content > .forget > .forget__reminder`
+      // block
+      // `body > .content > .forget > .reminder`
+      > .forget__reminder.reminder {
         // [ layout ]
         margin: {
-          top: 57 / 32 * 1rem;
+          top: 15 / 32 * 1rem;
           bottom: 27 / 32 * 1rem;
         }
 
         // [ skin ]
         height: 24 / 32 * 1rem;
-
-        // [ font ]
-        Font: {
+        color: #213262;
+        font: {
+          // @TODO
           family: notosanscjktc;
           size: 14 / 32 * 1rem;
           weight: normal;
@@ -368,35 +533,37 @@ body {
         text-align: center;
         line-height: 1.71;
         letter-spacing: normal;
-        color: #213262;
 
-        // `body > .content > .login > .forget > .forget__reminder > a`
-        > a {
+        // element
+        // `body > .content > .forget > .reminder > .reminder__text`
+        > .reminder__text {
           text-decoration: underline;
         }
       }
     }
 
     // block
-    // `body > .content > .login > .verify
+    // `body > .content > .verify
     > .verify {
-      // [ customized ]
-      @extend %login_template;
+      // [ template ]
+      @extend %login;
 
       // modifier
-      // `body > .content > .login > .verify.--hidden`
+      // `body > .content > .verify.verify--hidden`
       &--hidden {
+        // [ layout ]
         display: none;
       }
 
       // element
-      // `body > .content > .login > .verify > .verify__title`
+      // `body > .content > .verify > .verify__title`
       > .verify__title {
-        // [ layouts ]
-        margin: 32 / 32 * 1rem  0 0;
+        // [ layout ]
+        margin-top: 32 / 32 * 1rem;
 
         // [ skin ]
         font: {
+          // @TODO
           family: notosanscjktc;
           size: 24 / 32 * 1rem;
           weight: bold;
@@ -409,76 +576,14 @@ body {
       }
 
       // element
-      // `body > .content > .login > .verify > .verify__reminder`
-      > .verify__reminder {
-        // modifier
-        // `body > .content > .login > .verify > .verify__reminder--1`
-        &--1 {
-          // [ layout ]
-          margin-top: 22 / 32 * 1rem;
-          text-align: center;
-
-          // [ skin ]
-          Font: {
-            family: notosanscjktc;
-            size: 14 / 32 * 1rem;
-            weight: normal;
-            style: normal;
-            stretch: normal;
-          }
-          line-height: 1.71;
-          letter-spacing: normal;
-          color: #757575;
-        }
-
-        // modifier
-        // `body > .content > .login > .verify > .verify__reminder--2`
-        &--2 {
-          // [ layout ]
-          margin-top: 6 / 32 * 1rem;
-          text-align: center;
-
-          // [ skin ]
-          Font: {
-            family: notosanscjktc;
-            size: 14 / 32 * 1rem;
-            weight: normal;
-            style: normal;
-            stretch: normal;
-          }
-          line-height: 1.71;
-          letter-spacing: normal;
-          color: #757575;
-
-          > a {
-            text-decoration: underline;
-          }
-        }
-      }
-
-      // element
-      // `body > .content > .login > .verify > .verify__verify`
-      > .verify__verify {
-        // [ customizeation ]
-        @extend %input;
-
-        // [ layout ]
-        margin-top: 22 / 32 * 1rem;
-
-        // Placeholders' setting
-        &::placeholder {
-          @extend %placeholder;
-        }
-      }
-
-      // element
-      // `body > .content > .login > .verify > .verify__error`
-      > .verify__error {
-        // [ layout ]
-        margin-top: 14 / 32 * 1rem;
-
+      // `body > .content > .verify > .verify__reminder`
+      // block
+      // `body > .content > .verify > .reminder`
+      > .verify__reminder.reminder {
         // [ skin ]
-        Font: {
+        color: #757575;
+        font: {
+          // @TODO
           family: notosanscjktc;
           size: 14 / 32 * 1rem;
           weight: normal;
@@ -488,40 +593,97 @@ body {
         text-align: center;
         line-height: 1.71;
         letter-spacing: normal;
-        color: #d60b38;
 
         // modifier
-        // `body > .content > .login > .verify > .verify__error--hidden`
-        &--hidden {
-          display: none;
+        // `body > .content > .verify > .verify__reminder.verify__reminder--1`
+        &--1 {
+          // [ layout ]
+          margin-top: 22 / 32 * 1rem;
+        }
+
+        // modifier
+        // `body > .content > .verify > .verify__reminder.verify__reminder--2`
+        &--2 {
+          // [ layout ]
+          margin-top: 6 / 32 * 1rem;
+        }
+
+        // element
+        // `body > .content > .verify > .reminder > .reminder__text`
+        > .reminder__text {
+          // [ skin ]
+          text-decoration: underline;
         }
       }
 
       // element
-      // `body > .content > .login > .verify > .verify__sumbit_button`
-      > .verify__button {
-        // [ position ]
+      // `body > .content > .verify > .verify__code`
+      > .verify__code {
+        // [ template ]
+        @extend %input;
 
-        // [ Layout ]
-        margin: {
-          top: 33.6 / 32 * 1rem;
-          bottom: 52.8 / 32 * 1rem;
+        // [ layout ]
+        margin-top: 22 / 32 * 1rem;
+
+        // [ placeholder ]
+        &::placeholder {
+          // [ template ]
+          @extend %placeholder;
         }
+      }
 
-        // [ customization ]
+      // element
+      // `body > .content > .verify > .verify__button`
+      > .verify__button {
+        // [ layout ]
+        margin-top: 33.6 / 32 * 1rem;
+
+        // [ template ]
         @extend %button;
 
         // modifier
-        // `body > .content > .login > .verify > .verify__button--valid`
+        // `body > .content > .verify > .verify__button.verify__button--valid`
         &--valid {
           // [ skin ]
           background-color: #213262;
 
-          // [ hover ]
+          // [ interaction ]
           &:hover {
+            // [ skin ]
             background-color: #ffffff;
             color: #213262;
           }
+        }
+      }
+
+      // element
+      // `body > .content > .verify > .verify__error`
+      > .verify__error {
+        // [ layout ]
+        margin: {
+          top: 18 / 32 * 1rem;
+          bottom: 30 / 32 * 1rem;
+        }
+
+        // [ skin ]
+        color: #d60b38;
+        font: {
+          // @TODO
+          family: notosanscjktc;
+          size: 14 / 32 * 1rem;
+          weight: normal;
+          style: normal;
+          stretch: normal;
+        }
+        text-align: center;
+        line-height: 1.71;
+        letter-spacing: normal;
+
+        // modifier
+        // `body > .content > .verify > .verify__error.verify__error--hidden`
+        &--hidden {
+          // [ skin ]
+          visibility: hidden;
         }
       }
     }
@@ -529,23 +691,25 @@ body {
     // block
     // `.body > .content  > .reset`
     > .reset {
-      // [ customized ]
-      @extend %login_template;
+      // [ template ]
+      @extend %login;
 
       // modifier
-      // `.body > .content > .login > .reset`
+      // `.body > .content > .reset`
       &--hidden {
+        // [ layout ]
         display: none;
       }
 
       // element
-      // `body > .content > .login > .reset > .reset__title`
+      // `body > .content > .reset > .reset__title`
       > .reset__title {
-        // [ layouts ]
+        // [ layout ]
         margin-top: 32 / 32 * 1rem;
 
         // [ skin ]
         font: {
+          // @TODO
           family: notosanscjktc;
           size: 24 / 32 * 1rem;
           weight: bold;
@@ -558,27 +722,49 @@ body {
       }
 
       // element
-      // `body > .content > .login > .reset > .reset__input`
+      // `body > .content > .reset > .reset__input`
       > .reset__input {
-        // [ customization ]
+        // [ template ]
         @extend %input;
 
         // [ layout ]
         margin-top: 33 / 32 * 1rem;
 
         // modifier
-        // `body > .content > .login > .reset > .reset__input--check`
+        // `body > .content > .reset > .reset__input.reset__input--check`
         &--check {
-          // [ customization ]
-          @extend %input;
-
           // [ layout ]
           margin-top: 18 / 32 * 1rem;
         }
 
-        // Placeholders' setting
+        // [ placeholder ]
         &::placeholder {
+          // [ template ]
           @extend %placeholder;
+        }
+      }
+
+      // element
+      // `body > .content > .login > .reset > .reset__button`
+      > .reset__button {
+        // [ layout ]
+        margin-top: 33.6 / 32 * 1rem;
+
+        // [ template ]
+        @extend %button;
+
+        // modifier
+        // `body > .content > .login > .reset > .reset__button.reset__button--valid`
+        &--valid {
+          // [ skin ]
+          background-color: #213262;
+
+          // [ interaction ]
+          &:hover {
+            // [ skin ]
+            background-color: #ffffff;
+            color: #213262;
+          }
         }
       }
 
@@ -586,10 +772,15 @@ body {
       // `body > .content > .login > .reset > .reset__error`
       > .reset__error {
         // [ layout ]
-        margin-top: 14 / 32 * 1rem;
+        margin: {
+          top: 18 / 32 * 1rem;
+          bottom: 30 / 32 * 1rem;
+        }
 
         // [ skin ]
-        Font: {
+        color: #d60b38;
+        font: {
+          // @TODO
           family: notosanscjktc;
           size: 14 / 32 * 1rem;
           weight: normal;
@@ -599,38 +790,12 @@ body {
         text-align: center;
         line-height: 1.71;
         letter-spacing: normal;
-        color: #d60b38;
 
         // modifier
-        // `body > .content > .login > .reset > .reset__error--hidden`
+        // `body > .content > .login > .reset > .reset__error.reset__error--hidden`
         &--hidden {
-          display: none;
-        }
-      }
-
-      // element
-      // `body > .content > .login > .reset > .reset__button`
-      > .reset__button {
-        // [ layout ]
-        margin: {
-          top: 33.6 / 32 * 1rem;
-          bottom: 52.8 / 32 * 1rem;
-        }
-
-        // [ customization ]
-        @extend %button;
-
-        // modifier
-        // `body > .content > .login > .reset > .reset__button--valid`
-        &--valid {
           // [ skin ]
-          background-color: #213262;
-
-          // [ hover ]
-          &:hover {
-            background-color: #ffffff;
-            color: #213262;
-          }
+          visibility: hidden;
         }
       }
     }

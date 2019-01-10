@@ -4,42 +4,44 @@ append data
   -
     const i18n = Object.freeze( {
       'en-US': {
+        'title': 'Sign in',
         'login': {
           'title': 'Sign in',
           'account': 'Account',
           'password': 'Password',
-          'reset': 'Successfully reset! Please login.',
+          'reset': 'Reset successfully! Please sign in again.',
           'forget': 'Forget your password?',
-          'error': 'Account or password is not avaialbe',
+          'error': 'Account or password is not available',
           'button': 'Sign in',
         },
         'forget': {
           'title': 'Forget password',
           'account': 'Account',
           'button': 'Submit',
-          'description': 'We will send verification code to your e-mail',
-          'error': 'Account is not avaliable',
-          'reminder': 'If you lost your account, please contact ',
-          'administration staff': 'administration staff',
+          'description': 'We will send verification code to your email',
+          'error': 'Account is not available',
+          'reminder': 'If you lost your account, please ',
+          'staff': 'contact us',
         },
         'verify': {
           'title': 'Verify',
-          'reminder1': 'You may check your e-mail address.!',
-          'reminder2': 'no mail received?',
-          'link': 'resent verification code',
-          'verify': 'AABBCC',
-          'error': 'invalid code',
+          'reminder1': 'You may check your e-mail address!',
+          'reminder2': 'No mail received? ',
+          'link': 'Resent verification code',
+          'code': 'EX: AABBCC',
+          'error': 'Invalid code',
           'button': 'Submit',
         },
         'reset': {
           'title': 'Reset password',
           'input': 'New password',
-          'check': 'Check new password',
-          'error': 'check again',
+          'check': 'Repeat new password',
+          'error': 'Wrong password',
           'button': 'Submit',
         },
       },
       'zh-TW': {
+        'title': '登入',
         'login': {
           'title': '登入',
           'account': '帳號',
@@ -53,17 +55,17 @@ append data
           'title': '忘記密碼',
           'account': '帳號',
           'button': '送出',
-          'description': '我們將寄出驗證碼信件至您的信箱',
+          'description': '我們將寄出驗證碼至您的信箱',
           'error': '帳號不存在',
-          'reminder': '若您遺忘帳號，請聯絡',
-          'administration staff': '行政人員',
+          'reminder': '若您遺忘帳號，請',
+          'staff': '聯絡我們',
         },
         'verify': {
           'title': '輸入驗證碼',
-          'reminder1': '郵件已寄出！請至預設信箱確認驗證碼!',
-          'reminder2' : '沒有收到郵件?',
+          'reminder1': '郵件已寄出！請至預設信箱確認驗證碼！',
+          'reminder2' : '沒有收到郵件? ',
           'link': '重新寄出驗證碼',
-          'verify': 'AABBCC',
+          'code': 'EX: AABBCC',
           'error': '驗證碼錯誤',
           'button': '送出驗證碼',
         },
@@ -72,7 +74,7 @@ append data
           'input': '輸入新密碼',
           'check': '確認新密碼',
           'error': '確認密碼錯誤',
-          'button': '確定要更改密碼',
+          'button': '確認更改密碼',
         },
       },
     } );
@@ -87,41 +89,44 @@ append stylesheets
 append header
 
 append content
-  //- page login
-  form#login.login( method = 'post' )
-    h1.login__title= i18n[ language ][ 'login' ].title
-    input.login__input.login__input--account( type = 'text', name = 'account', placeholder = i18n[ language ][ 'login' ].account )
-    input.login__input.login__input--password( type = 'password', name = 'password', placeholder = i18n[ language ][ 'login' ].password )
-    p.login__reset.login__reset--hidden= i18n[ language ][ 'login' ].reset
-    a.login__forget( href = '' )= i18n[ language ][ 'login' ].forget
+  //- login
+  form#login.login( method = 'post', action = url( { href: '/login' } ) )
+    h1.login__title= i18n[ language ][ 'login' ][ 'title' ]
+    input.login__input.login__input--account( type = 'text', name = 'account', placeholder = i18n[ language ][ 'login' ][ 'account' ], required )
+    input.login__input.login__input--password( type = 'password', name = 'password', placeholder = i18n[ language ][ 'login' ][ 'password' ], required )
+    p.login__reset.login__reset--hidden= i18n[ language ][ 'login' ][ 'reset' ]
+    a.login__forget= i18n[ language ][ 'login' ][ 'forget' ]
     section.login__verification
-    p.login__error.login__error--hidden= i18n[ language ][ 'login' ].error
-    input.login__button(type = 'submit', value = i18n[ language ][ 'login' ].button, disabled)
-  //- page forget
+    input.login__button( type = 'submit', value = i18n[ language ][ 'login' ][ 'button' ], disabled )
+    p.login__error.login__error--hidden= i18n[ language ][ 'login' ][ 'error' ]
+
+  //- forget
   form#forget.forget.forget--hidden( method = 'post' )
-    h1.forget__title= i18n[ language ][ 'forget' ].title
-    p.forget__description= i18n[ language ][ 'forget' ].description
-    input.forget__input.forget__input--account( type = 'text', name = 'account', placeholder = i18n[ language ].account)
-    input.forget__button( type = 'submit', value = i18n[ language ][ 'forget' ].button, disabled)
-    p.forget__error.forget__error--hidden= i18n[ language ][ 'forget' ].error
-    p.forget__reminder= i18n[ language ][ 'forget' ].reminder
-      a.text(href='')= i18n[ language ][ 'forget' ][ 'administration staff' ]
-  //- page verifyrify
+    h1.forget__title= i18n[ language ][ 'forget' ][ 'title' ]
+    p.forget__description= i18n[ language ][ 'forget' ][ 'description' ]
+    input.forget__input( type = 'text', name = 'account', placeholder = i18n[ language ][ 'forget' ][ 'account' ], required )
+    input.forget__button( type = 'submit', value = i18n[ language ][ 'forget' ][ 'button' ], disabled )
+    p.forget__error.forget__error--hidden= i18n[ language ][ 'forget' ][ 'error' ]
+    p.forget__reminder.reminder= i18n[ language ][ 'forget' ][ 'reminder' ]
+      a.reminder__text( href = url( { href: 'about/contact' } ) )= i18n[ language ][ 'forget' ][ 'staff' ]
+
+  //- verify
   form#verify.verify.verify--hidden( method = 'post' )
-    h1.verify__title= i18n[ language ][ 'verify' ].title
-    p.verify_reminder.verify__reminder--1= i18n[ language ][ 'verify' ].reminder1
-    p.verify_reminder.verify__reminder--2= i18n[ language ][ 'verify' ].reminder2
-      a(href='#')= i18n[ language ][ 'verify' ].link
-    input.verify__verify( type = 'text', name = 'verify_code', placeholder = i18n[ language ][ 'verify' ].verify )
-    p.verify__error.verify__error--hidden= i18n[ language ][ 'verify' ].error
-    input.verify__button( type = 'submit', value = i18n[ language ][ 'verify' ].button, disabled )
-  //- page reset
+    h1.verify__title= i18n[ language ][ 'verify' ][ 'title' ]
+    p.verify__reminder.reminder.reminder.verify__reminder--1= i18n[ language ][ 'verify' ][ 'reminder1' ]
+    p.verify__reminder.reminder.reminder.verify__reminder--2= i18n[ language ][ 'verify' ][ 'reminder2' ]
+      a.reminder__text( href = '#' )= i18n[ language ][ 'verify' ][ 'link' ]
+    input.verify__code( type = 'text', name = 'verify_code', placeholder = i18n[ language ][ 'verify' ][ 'code' ], required )
+    input.verify__button( type = 'submit', value = i18n[ language ][ 'verify' ][ 'button' ], disabled )
+    p.verify__error.verify__error--hidden= i18n[ language ][ 'verify' ][ 'error' ]
+
+  //- reset
   form#reset.reset.reset--hidden( method = 'post' )
-    h1.reset__title= i18n[ language ][ 'reset' ].title
-    input.reset__input( type = 'password', name = 'newPassword', placeholder = i18n[ language ][ 'reset' ].input )
-    input.reset__input.reset__input--check( type = 'password', name = 'check', placeholder = i18n[ language ][ 'reset' ].check )
-    p.reset__error.reset__error--hidden= i18n[ language ][ 'reset' ].error
-    input.reset__button( type = 'submit', value = i18n[ language ][ 'reset' ].button )
+    h1.reset__title= i18n[ language ][ 'reset' ][ 'title' ]
+    input.reset__input( type = 'password', name = 'newPassword', placeholder = i18n[ language ][ 'reset' ][ 'input' ] )
+    input.reset__input.reset__input--check( type = 'password', name = 'check', placeholder = i18n[ language ][ 'reset' ][ 'check' ] )
+    input.reset__button( type = 'submit', value = i18n[ language ][ 'reset' ][ 'button' ] )
+    p.reset__error.reset__error--hidden= i18n[ language ][ 'reset' ][ 'error' ]
 
 append footer
 

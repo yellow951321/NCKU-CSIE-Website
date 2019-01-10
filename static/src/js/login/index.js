@@ -1,5 +1,8 @@
 import WebLanguageUtils from 'static/src/js/utils/language.js';
 import serverSetting from 'settings/server/config.js';
+import header from 'static/src/js/components/common/header/index.js';
+
+header( document.getElementById( 'header' ) );
 
 const currentLanguage = WebLanguageUtils.currentLanguage;
 
@@ -24,6 +27,8 @@ const input = () => {
 const loginClear = () => {
     login.querySelector( '.login__input--account' ).value = '';
     login.querySelector( '.login__input--password' ).value = '';
+
+    login.querySelector( '.login__button' ).classList.remove( 'login__button--valid' );
 }
 
 login.querySelector( '.login__input--account' ).addEventListener( 'input', input );
@@ -31,6 +36,8 @@ login.querySelector( '.login__input--password' ).addEventListener( 'input', inpu
 
 const toForget = (event) => {
     event.preventDefault();
+
+    loginClear();
     login.classList.add( 'login--hidden' );
     forget.classList.remove( 'forget--hidden' );
 }
@@ -58,7 +65,7 @@ login.addEventListener( 'submit', ( event ) => {
         if( data[ 'response' ] === 'success' )
         {
             loginClear();
-            error.classList.remove( 'login__error--hidden' );
+            error.classList.add( 'login__error--hidden' );
             window.location = `${ serverSetting.host }/?language=${ currentLanguage }`;
         }
         else
@@ -75,7 +82,7 @@ login.addEventListener( 'submit', ( event ) => {
 
 // js about forget
 const forgetButton = () => {
-    const account = forget.querySelector( '.forget__input--account' );
+    const account = forget.querySelector( '.forget__input' );
     const button = forget.querySelector( '.forget__button' );
     if ( account.value !== '' ) {
         button.disabled = false;
@@ -88,17 +95,19 @@ const forgetButton = () => {
 };
 
 const forgetClear = () => {
-    forget.querySelector( '.forget__input--account' ).value = '';
+    forget.querySelector( '.forget__input' ).value = '';
+
+    forget.querySelector( '.forget__button' ).classList.remove( 'forget__button--valid' );
 }
 
-forget.querySelector( '.forget__input--account' ).addEventListener( 'input', forgetButton );
+forget.querySelector( '.forget__input' ).addEventListener( 'input', forgetButton );
 
 forget.addEventListener( 'submit', ( event ) => {
     event.preventDefault();
 
     const reqURL = `${ serverSetting.host }/api/auth/login/forget?language=${ currentLanguage }`;
     const error = forget.querySelector( '.forget__error' );
-    const account = forget.querySelector( '.forget__input--account' )
+    const account = forget.querySelector( '.forget__input' )
     fetch(reqURL, {
         method: 'post',
         body: JSON.stringify({'account': account.value}),
@@ -128,7 +137,7 @@ forget.addEventListener( 'submit', ( event ) => {
 
 // js about verify
 const verifyButton = () => {
-    const input = verify.querySelector( '.verify__verify' );
+    const input = verify.querySelector( '.verify__code' );
     const button = verify.querySelector( '.verify__button' );
     if ( input.value !== '' ) {
         button.disabled = false;
@@ -141,17 +150,19 @@ const verifyButton = () => {
 };
 
 const verifyClear = () => {
-    verify.querySelector( '.verify__verify' ).value = '';
+    verify.querySelector( '.verify__code' ).value = '';
+
+    verify.querySelector( '.verify__button' ).classList.remove( 'verify__button--valid' );
 }
 
-verify.querySelector( '.verify__verify' ).addEventListener( 'input', verifyButton );
+verify.querySelector( '.verify__code' ).addEventListener( 'input', verifyButton );
 
 verify.addEventListener( 'submit', ( event ) => {
     event.preventDefault();
 
     const reqURL = `${ serverSetting.host }/api/auth/login/verify?language=${ currentLanguage }`;
     const error = verify.querySelector( '.verify__error' );
-    const input = verify.querySelector( '.verify__verify' )
+    const input = verify.querySelector( '.verify__code' )
     fetch(reqURL, {
         method: 'post',
         body: JSON.stringify({'verify': input.value}),
@@ -197,6 +208,8 @@ const resetButton = () => {
 const resetClear = () => {
     reset.querySelector( '.reset__input' ).value = '';
     reset.querySelector( '.reset__input--check' ).value = '';
+
+    reset.querySelector( '.reset__button' ).classList.remove( 'reset__button--valid' );
 }
 
 reset.querySelector( '.reset__input' ).addEventListener( 'input', resetButton );
