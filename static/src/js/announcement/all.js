@@ -1,7 +1,42 @@
-import header from 'static/src/js/components/common/header/index.js';
-import { multipleDefaultTagsFilter, } from 'static/src/js/components/announcement/filter/index.js';
+import GetHeader from 'static/src/js/components/common/header.js';
+import MultipleDefaultTagFilter from 'static/src/js/components/announcement/multiple-default-tag-filter.js';
+import WebLanguageUtils from 'static/src/js/utils/language.js';
 
-header( document.getElementById( 'header' ) );
+window.addEventListener( 'load', () => {
+    const header = new GetHeader( {
+        headerDOM: document.getElementById( 'header' ),
+    } );
 
-// Construct filter with no default tags.
-multipleDefaultTagsFilter( [] );
+    const filter = new MultipleDefaultTagFilter( {
+        defaultTag: [
+            'award',
+            'international',
+            'scholarship',
+            'internship',
+            'college',
+            'competition',
+            'conference',
+            'exhibition',
+            'speech',
+            'master',
+            'course',
+            'faculty',
+            'recruitment',
+            'rule',
+            'phd',
+        ],
+        supportedTag:          [],
+        filterDOM:             document.getElementById( 'filter' ),
+        announcementPinnedDOM: document.getElementById( 'announcement--pinned' ),
+        announcementNormalDOM: document.getElementById( 'announcement--normal' ),
+        pagesDOM:              document.getElementById( 'pages' ),
+        scrollTopDOM:          document.getElementById( 'announcement--normal' ),
+        amount:                6,
+        from:                  new Date( '2019/01/01' ),
+        to:                    new Date( Date.now() ),
+        page:                  1,
+        visiblePageNum:        2,
+        currentLanguageId:     WebLanguageUtils.currentLanguageId,
+    } );
+    filter.getAll();
+} );

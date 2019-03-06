@@ -1,40 +1,46 @@
 @charset 'utf-8';
 @import 'components/common/font';
+@include font--notosanstc();
 
-// Global reset setting
-@mixin reset () {
-  // Avoid duplicated import file.
-  @if not variable-exists( reset ) {
-    $reset: true !global;
+*, *::before, *::after {
+  // Box model: border-box
+  // Width include border, padding and content.
+  margin: 0;
+  border: 0;
+  padding: 0;
+  box-sizing: border-box;
 
-    * {
-      // Box model.
-      margin: 0;
-      outline: 0;
-      border: 0;
-      padding: 0;
-      box-sizing: border-box;
+  // Inherit style from parent.
+  font-size: inherit;
+  color: inherit;
 
-      // Inherit style from parent.
-      font-size: inherit;
-      color: inherit;
+  // No extra decoration.
+  outline: 0;
+  text-decoration: none;
+}
 
-      // No extra decoration.
-      text-decoration: none;
-      list-style: none;
-    }
+:active, :focus {
+  outline: 0;
+}
 
-    html, body {
-      // Screen size.
-      width: 100%;
-      height: 100%;
+::-moz-focus-inner {
+  border: 0;
+}
 
-      // Default font.
-      font: {
-        family: var( --font__family--default );
-        size: 32px;
-      }
-    }
+ul {
+  // No extra decoration.
+  list-style-type: none;
+}
+
+html, body {
+  // Screen size.
+  width: 100%;
+  height: 100%;
+
+  // Default font.
+  font: {
+    size: font__base-font-size();
+    family: 'Noto Sans TC', 'Arial', 'Microsoft JhengHei';
+    weight: normal;
   }
 }
-@include reset();

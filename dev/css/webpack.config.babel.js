@@ -1,17 +1,18 @@
 import path from 'path';
-
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import StyleLintPlugin from 'stylelint-webpack-plugin';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 
 import browserSupportConditions from './browserlist.js';
-import { projectRoot, } from '../../settings/server/config.js';
+import { staticHost, projectRoot, } from '../../settings/server/config.js';
 
 const sassRoot = path.join( projectRoot, 'static/src/sass' );
 const imageRoot = path.join( projectRoot, 'static/src/image' );
 const cssRoot = path.join( projectRoot, 'static/dist/css' );
+const nodeModulesRoot = path.join( projectRoot, 'node_modules' );
 
+const isDevMode = process.env.NODE_ENV === 'development';
 
 /**
  * Build CSS off all language version HTML for each `.scss` file.
@@ -30,7 +31,7 @@ export default {
      * In production, this option should be `devtool: false`.
      */
 
-    devtool: 'inline-sourcemap',
+    devtool: isDevMode ? 'inline-sourcemap' : false,
 
     /**
      * Bundle mode.
@@ -39,7 +40,7 @@ export default {
      * In production, this option should be `mode: 'production'`.
      */
 
-    mode:    'development',
+    mode:    isDevMode ? 'development' : 'production',
 
     /**
      * Entry files for bundling.
@@ -52,21 +53,25 @@ export default {
         'about/faculty-detail': path.join( sassRoot, 'about/faculty-detail.scss' ),
         'about/faculty':        path.join( sassRoot, 'about/faculty.scss' ),
         'about/index':          path.join( sassRoot, 'about/index.scss' ),
+
         'about/intro':          path.join( sassRoot, 'about/intro.scss' ),
         'about/staff':          path.join( sassRoot, 'about/staff.scss' ),
 
         // Route `announcement`
-        'announcement/activity':     path.join( sassRoot, 'announcement/activity.scss' ),
-        'announcement/all':          path.join( sassRoot, 'announcement/all.scss' ),
-        'announcement/index':        path.join( sassRoot, 'announcement/index.scss' ),
-        'announcement/announcement': path.join( sassRoot, 'announcement/announcement.scss' ),
-        'announcement/recruitment':  path.join( sassRoot, 'announcement/recruitment.scss' ),
+        'announcement/activity':    path.join( sassRoot, 'announcement/activity.scss' ),
+        'announcement/all':         path.join( sassRoot, 'announcement/all.scss' ),
+        'announcement/index':       path.join( sassRoot, 'announcement/index.scss' ),
+        'announcement/detail':      path.join( sassRoot, 'announcement/detail.scss' ),
+        'announcement/recruitment': path.join( sassRoot, 'announcement/recruitment.scss' ),
+
+        // Route `error`
+        'error/404': path.join( sassRoot, 'error/404.scss' ),
 
         // Route `home`
         'home/index': path.join( sassRoot, 'home/index.scss' ),
 
         // Route `login`
-        'login/index':          path.join( sassRoot, 'login/index.scss' ),
+        // 'login/index':          path.join( sassRoot, 'login/index.scss' ),
 
         // Route `research`
         'research/index':        path.join( sassRoot, 'research/index.scss' ),
@@ -84,16 +89,13 @@ export default {
 
         // Route `student`
         'student/college':       path.join( sassRoot, 'student/college.scss' ),
-        'student/course':        path.join( sassRoot, 'student/course.scss' ),
         'student/index':         path.join( sassRoot, 'student/index.scss' ),
-        'student/international': path.join( sassRoot, 'student/international.scss' ),
-        'student/internship':    path.join( sassRoot, 'student/internship.scss' ),
         'student/master':        path.join( sassRoot, 'student/master.scss' ),
         'student/phd':           path.join( sassRoot, 'student/phd.scss' ),
-        'student/scholarship':   path.join( sassRoot, 'student/scholarship.scss' ),
 
         // Route `user`
-        'user/index': path.join( sassRoot, 'user/index.scss' ),
+        'user/index':             path.join( sassRoot, 'user/index.scss' ),
+        'user/announcement/edit': path.join( sassRoot, 'user/announcement/edit.scss' ),
     },
 
     /**
@@ -116,6 +118,23 @@ export default {
      */
 
     target:  'web',
+
+    /**
+     * Relative url alias.
+     *
+     * When writing `@import` or `url()` statement to import module,
+     * no need to write relative path such as `'./'` or `'../'`.
+     * Only work for following path:
+     * - `@import '~thirdPartyLib/...'`
+     * - `url('~image/...')`
+     */
+
+    resolve: {
+        alias: {
+            image:         imageRoot,
+            thirdPartyLib: nodeModulesRoot,
+        },
+    },
 
     /**
      * Webpack loader modules.
@@ -142,6 +161,7 @@ export default {
              */
 
             {
+                // Rules for SCSS files.
                 test: /\.scss$/,
                 use:  [
                     {
@@ -153,13 +173,13 @@ export default {
                     {
                         loader:  'css-loader',
                         options: {
-                            sourceMap: true,
+                            sourceMap: isDevMode,
                         },
                     },
                     {
                         loader:  'postcss-loader',
                         options: {
-                            sourceMap: true,
+                            sourceMap: isDevMode,
                             plugins:   [
                                 autoprefixer( { browserSupportConditions, } ),
                                 cssnano(),
@@ -171,9 +191,8 @@ export default {
                         options: {
                             includePaths: [
                                 sassRoot,
-                                imageRoot,
                             ],
-                            sourceMap:    true,
+                            sourceMap:    isDevMode,
                         },
                     },
                 ],
@@ -182,7 +201,7 @@ export default {
             /**
              * Loader for image files.
              *
-             * Use `url-loader` to convert image file into data url.
+             * Use `file-loader` to convert image file path into public static file url.
              * Image should only appear in `.pug` or `.css` files.
              * Work with following image format:
              * - `.gif`
@@ -192,9 +211,18 @@ export default {
              */
 
             {
+                // Convert image binary file into data url.
                 test: /\.(gif|png|jpe?g|svg)$/,
                 use:  [
-                    'url-loader',
+                    {
+                        loader:  'file-loader',
+                        options: {
+                            name ( file ) {
+                                return `${ staticHost }/image${ file.split( imageRoot )[ 1 ] }`;
+                            },
+                            emitFile: false,
+                        },
+                    },
                 ],
             },
         ],

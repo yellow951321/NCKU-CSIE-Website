@@ -1,10 +1,16 @@
 import path from 'path';
 
-import languageSettings from '../../settings/language/config.js';
+import LanguageUtils from '../../models/common/utils/language.js';
+import TagUtils from '../../models/announcement/utils/tag.js';
+import ResearchGroupUtils from '../../models/faculty/utils/research-group';
+import DepartmentUtils from '../../models/faculty/utils/department.js';
+import UrlUtils from '../../static/src/js/utils/url.js';
 import { projectRoot, host, staticHost, } from '../../settings/server/config.js';
 
 const pugRoot = path.join( projectRoot, 'static/src/pug' );
 const htmlRoot = path.join( projectRoot, 'static/dist/html' );
+
+const isDevMode = process.env.NODE_ENV === 'development';
 
 /**
  * Build different language version HTML for each `.pug` file.
@@ -27,7 +33,7 @@ const htmlRoot = path.join( projectRoot, 'static/dist/html' );
  *      - Lowest completely loading page time (client will need to wait twice to see all page content) among three.
  */
 
-export default languageSettings.support.map( language => ( {
+export default LanguageUtils.supportedLanguageId.map( languageId => ( {
     /**
      * Webpack built-in develop tools.
      *
@@ -37,7 +43,7 @@ export default languageSettings.support.map( language => ( {
      * In production, this option should be `devtool: false`.
      */
 
-    devtool: 'inline-sourcemap',
+    devtool: isDevMode ? 'inline-sourcemap' : false,
 
     /**
      * Bundle mode.
@@ -46,7 +52,7 @@ export default languageSettings.support.map( language => ( {
      * In production, this option should be `mode: 'production'`.
      */
 
-    mode:    'development',
+    mode:    isDevMode ? 'development' : 'production',
 
     /**
      * Entry files for bundling.
@@ -65,14 +71,16 @@ export default languageSettings.support.map( language => ( {
         'announcement/activity':     path.join( pugRoot, 'announcement/activity.pug' ),
         'announcement/all':          path.join( pugRoot, 'announcement/all.pug' ),
         'announcement/index':        path.join( pugRoot, 'announcement/index.pug' ),
-        'announcement/announcement': path.join( pugRoot, 'announcement/announcement.pug' ),
         'announcement/recruitment':  path.join( pugRoot, 'announcement/recruitment.pug' ),
+
+        // Route `error`
+        'error/404': path.join( pugRoot, 'error/404.pug' ),
 
         // Route `home`
         'home/index': path.join( pugRoot, 'home/index.pug' ),
 
         // Route `login`
-        'login/index':          path.join( pugRoot, 'login/index.pug' ),
+        // 'login/index':          path.join( pugRoot, 'login/index.pug' ),
 
         // Route `research`
         'research/index':        path.join( pugRoot, 'research/index.pug' ),
@@ -90,13 +98,9 @@ export default languageSettings.support.map( language => ( {
 
         // Route `student`
         'student/college':       path.join( pugRoot, 'student/college.pug' ),
-        'student/course':        path.join( pugRoot, 'student/course.pug' ),
         'student/index':         path.join( pugRoot, 'student/index.pug' ),
-        'student/international': path.join( pugRoot, 'student/international.pug' ),
-        'student/internship':    path.join( pugRoot, 'student/internship.pug' ),
         'student/master':        path.join( pugRoot, 'student/master.pug' ),
         'student/phd':           path.join( pugRoot, 'student/phd.pug' ),
-        'student/scholarship':   path.join( pugRoot, 'student/scholarship.pug' ),
 
         // Route `user`
         'user/index':              path.join( pugRoot, 'user/index.pug' ),
@@ -156,48 +160,37 @@ export default languageSettings.support.map( language => ( {
                         loader:  'file-loader',
                         options: {
                             name ( file ) {
-                                return `${ file.split( pugRoot )[ 1 ].split( '.pug' )[ 0 ] }.${ language }.html`;
+                                return `${ file.split( pugRoot )[ 1 ].split( '.pug' )[ 0 ] }.${ languageId }.html`;
                             },
                         },
                     },
                     'extract-loader',
                     {
                         loader:  'html-loader',
-                        options: {
-                            // Mainly used by `static/src/pug/components/common/image.pug`.
-                            root: projectRoot,
-                        },
                     },
                     {
                         loader:  'pug-html-loader',
                         options: {
                             basedir: pugRoot,
                             data:    {
-                                host,
-                                staticHost,
-                                language,
+                                SERVER: {
+                                    host,
+                                    staticHost,
+                                },
+                                LANG: {
+                                    id:            languageId,
+                                    getLanguageId: LanguageUtils.getLanguageId,
+                                },
+                                UTILS: {
+                                    url:             UrlUtils.serverUrl( new UrlUtils( host, languageId ) ),
+                                    staticUrl:       UrlUtils.serverUrl( new UrlUtils( staticHost, languageId ) ),
+                                    TagUtils,
+                                    ResearchGroupUtils,
+                                    DepartmentUtils,
+                                },
                             },
                         },
                     },
-                ],
-            },
-
-            /**
-             * Loader for image files.
-             *
-             * Use `url-loader` to convert image file into data url.
-             * Image should only appear in `.pug` or `.css` files.
-             * Work with following image format:
-             * - `.gif`
-             * - `.png`
-             * - `.jpg` or `.jpeg`
-             * - `.svg`
-             */
-
-            {
-                test: /\.(gif|png|jpe?g|svg)$/,
-                use:  [
-                    'url-loader',
                 ],
             },
         ],
